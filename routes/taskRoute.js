@@ -1,14 +1,17 @@
 import express from "express"
-import { assignUsersToTask, createTask, getProjectTasks, updateTaskStatus } from "../controller/taskController.js"
+import { assignUsersToTask, createTask, getMyTasks, getProjectTasks, updateTaskStatus } from "../controller/taskController.js"
+import isAuth from "../middleware/isAuth.js"
 
 const taskRouter = express.Router()
 
-taskRouter.post("/createtask",createTask);
+taskRouter.post("/task", createTask)
 
-taskRouter.get("/project-tasks/:projectId",getProjectTasks)
+taskRouter.get("/task/mytasks",isAuth,getMyTasks)
 
-taskRouter.put("/update-status/:taskId",updateTaskStatus)
+taskRouter.get("/task/:projectId", getProjectTasks)
 
-taskRouter.put("/assign-users/:taskId",assignUsersToTask)
+taskRouter.put("/task/status/:taskId", updateTaskStatus)
+
+taskRouter.put("/task/assign/:taskId", assignUsersToTask)
 
 export default taskRouter;

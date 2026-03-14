@@ -29,9 +29,10 @@ app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 app.use("/api",projectRouter)
 app.use("/api",taskRouter)
+// app.use("/api",userTaskRouter)
  
 
-app.listen(PORT,()=> {
+app.listen(PORT,()=> { 
     connectDb()
     console.log(`server started at port ${PORT}`)
 }) 

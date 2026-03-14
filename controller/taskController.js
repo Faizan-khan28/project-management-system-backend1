@@ -108,3 +108,30 @@ export const assignUsersToTask = async (req,res)=>{
         
     }
 }
+
+
+export const getMyTasks = async (req,res) => {
+
+ try {
+   console.log("USER ID:", req.userId)
+   const tasks = await Task.find({
+   assignedTo: { $in: [req.userId] }
+  })
+  .populate("projectId","projectName")
+
+  res.status(200).json({
+   success:true,
+   tasks
+  })
+
+ } catch (error) {
+
+  console.log("MY TASK ERROR:", error)
+
+  res.status(500).json({
+   message:"Error fetching tasks"
+  })
+
+ }
+
+}
